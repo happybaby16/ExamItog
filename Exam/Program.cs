@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Exam
 {
@@ -20,9 +17,10 @@ namespace Exam
                 answer.FindHardWay(answer.ribs, start);
 
             }
-            Console.WriteLine(answer.s);
             answer.Parse();
+            Console.WriteLine(answer.s);
             answer.WriteFile();
+            Console.ReadLine();
         }
     }
 }

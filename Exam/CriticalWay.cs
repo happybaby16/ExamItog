@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Exam
 {
-    class CriticalWay
+    public class CriticalWay
     {
 
         public string pathIn { get; set; }
@@ -21,13 +21,17 @@ namespace Exam
         }
 
         
-        string s = ""; // Переменная, куда записываются результат прохождения по всем веткам
+        public string s = ""; // Переменная, куда записываются результат прохождения по всем веткам
 
         public List<Points> ribs = new List<Points>();// Список из рёбер и их весов
 
         List<dynamic[]> ways_weight = new List<dynamic[]>();// Массив, в который записываются пути и их суммарный вес
 
         int end_point;// Конечная точка критического пути
+
+
+
+
 
         /// <summary>
         /// Метод, который проходит по всем веткам за счёт рекурсии. Ответ записывает в переменную "s".
