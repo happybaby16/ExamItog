@@ -9,6 +9,7 @@ namespace Exam
     {
         static void Main(string[] args)
         {
+
             Trace.Listeners.Add(new TextWriterTraceListener(new StreamWriter("log.txt", true)));
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
             Trace.AutoFlush = true;
@@ -24,7 +25,6 @@ namespace Exam
             }
             answer.Parse();
             answer.WriteFile();
-            Console.ReadLine();
         }
     }
 }
