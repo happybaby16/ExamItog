@@ -12,45 +12,16 @@ namespace Exam
         static void Main(string[] args)
         {
 
-            List<CriticalWay> ribs = new List<CriticalWay>();
-            StreamReader sr = new StreamReader(@"data.csv");
-            using (sr)
-            {
-                while (sr.EndOfStream != true)
-                {
-                    try
-                    {
+            
 
-                        var a = sr.ReadLine().Split(';');
-                        CriticalWay temp = new CriticalWay();
-                        temp.AddData(Convert.ToInt32(a[0]), Convert.ToInt32(a[1]), Convert.ToInt32(a[2]));
-                        ribs.Add(temp);
-                    }
-                    catch
-                    {
-                        break;
-                    }
-                }
-            }
-
-            int max = ribs[0].in_point;
-            foreach (CriticalWay a in ribs)
-            {
-                if (max < a.in_point)
-                {
-                    max = a.in_point;
-                }
-
-            }
+            CriticalWay answer = new CriticalWay("In.txt", "Out.txt");
 
 
-            int end_point = max;
 
-            CriticalWay answer = new CriticalWay();
-            foreach (CriticalWay start in ribs.Where(x => x.out_point == 1))
+            foreach (Points start in answer.ribs.Where(x => x.out_point == 1))
             {
 
-                answer.FindHardWay(ribs, start, end_point);
+                answer.FindHardWay(answer.ribs, start);
 
             }
             answer.Parse();

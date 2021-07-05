@@ -9,21 +9,26 @@ namespace Exam
 {
     class CriticalWay
     {
-        public string s = "";
-        List<dynamic[]> ways_weight = new List<dynamic[]>();
 
-        public int out_point { get; set; }
-        public int in_point { get; set; }
-        public int weight { get; set; }
+        public string pathIn { get; set; }
+        public string pathOut { get; set; }
 
-        public void AddData(int out_p, int in_p, int w)
+
+        public CriticalWay(string pathIn, string pathOut)
         {
-            out_point = out_p;
-            in_point = in_p;
-            weight = w;
+            this.pathIn = pathIn;
+            this.pathOut = pathOut;
         }
 
-        public int FindHardWay(List<CriticalWay> ribs, CriticalWay start_point, int end_point)
+
+        public string s = "";
+        public List<Points> ribs = new List<Points>();
+        List<dynamic[]> ways_weight = new List<dynamic[]>();
+
+        int end_point;
+
+
+        public int FindHardWay(List<Points> ribs, Points start_point)
         {
 
 
@@ -44,14 +49,14 @@ namespace Exam
 
 
 
-            foreach (CriticalWay ob in ribs.Where(x => x.out_point == start_point.in_point))
+            foreach (Points ob in ribs.Where(x => x.out_point == start_point.in_point))
             {
                 s = s + start_point.out_point + " - " + start_point.in_point + "|" + start_point.weight + "\n";
                 if (start_point.in_point == ob.out_point)
                 {
 
                     weight = weight + ob.weight;
-                    weight = weight + FindHardWay(ribs, ob, end_point);
+                    weight = weight + FindHardWay(ribs, ob);
 
 
 
@@ -117,6 +122,42 @@ namespace Exam
             return index;
         }
 
+
+
+
+        public void ReadFile(string path)
+        { 
+            StreamReader sr = new StreamReader(path);
+            using (sr)
+            {
+                while (sr.EndOfStream != true)
+                {
+                    try
+                    {
+
+                        var a = sr.ReadLine().Split(';');
+                        Points temp = new Points(Convert.ToInt32(a[0]), Convert.ToInt32(a[1]), Convert.ToInt32(a[2]));
+                        ribs.Add(temp);
+                    }
+                    catch
+                    {
+                        break;
+                    }
+                }
+            }
+
+            int max = ribs[0].in_point;
+            foreach (Points a in ribs)
+            {
+                if (max < a.in_point)
+                {
+                    max = a.in_point;
+                }
+
+            }
+            end_point = max;
+           
+        }
 
         public void WriteFile(string path)
         {
