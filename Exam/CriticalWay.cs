@@ -147,6 +147,7 @@ namespace Exam
                     index = i;
                 }
             }
+            Trace.WriteLine("[" + DateTime.Now + "] " + "Информация: " + "Найден критический путь.");
             return index;
         }
 
@@ -178,6 +179,7 @@ namespace Exam
                             {
                                 sw.WriteLine("Ошибка: " + ex.Message);
                                 sw.Close();
+                                Trace.WriteLine("[" + DateTime.Now + "] " + "Ошибка: " + ex.Message);
                                 Process.GetCurrentProcess().Kill();
 
                             }
@@ -202,6 +204,7 @@ namespace Exam
                 {
                     sw.WriteLine("Ошибка: " + ex.Message);
                     sw.Close();
+                    Trace.WriteLine("[" + DateTime.Now + "] " + "Ошибка: " + ex.Message);
                     Process.GetCurrentProcess().Kill();
 
                 }
@@ -225,6 +228,7 @@ namespace Exam
             StreamWriter sw = new StreamWriter(pathOut, false, Encoding.UTF8);
             sw.WriteLine(ways_weight[FindMax()][0] + ways_weight[FindMax()][1] + " - длина критического пути");
             sw.Close();
+            Trace.WriteLine("[" + DateTime.Now + "] " + "Информация: " + "Запись критического пути в файл.");
         }
 
 

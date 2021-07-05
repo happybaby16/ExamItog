@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-
+using System.Diagnostics;
+using System.IO;
 
 namespace Exam
 {
@@ -8,6 +9,10 @@ namespace Exam
     {
         static void Main(string[] args)
         {
+            Trace.Listeners.Add(new TextWriterTraceListener(new StreamWriter("log.txt", true)));
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            Trace.AutoFlush = true;
+
 
             CriticalWay answer = new CriticalWay("In.csv", "Out.csv");
             answer.ReadFile();
