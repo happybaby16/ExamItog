@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Exam
 {
+    /// <summary>
+    /// Класс поиска критического пути
+    /// </summary>
     public class CriticalWay
     {
 
@@ -21,7 +23,7 @@ namespace Exam
             this.pathOut = pathOut;
         }
 
-        
+
         public string s = ""; // Переменная, куда записываются результат прохождения по всем веткам
 
         public List<Points> ribs = new List<Points>();// Список из рёбер и их весов
@@ -132,10 +134,10 @@ namespace Exam
 
 
 
-       /// <summary>
-       /// Метод поиска критического пути, который возвращает индекс на котором находится критический путь
-       /// </summary>
-       /// <returns>int</returns>
+        /// <summary>
+        /// Метод поиска критического пути, который возвращает индекс на котором находится критический путь
+        /// </summary>
+        /// <returns>int</returns>
         public int FindMax()
         {
             int max = ways_weight[0][1], index = 0;
@@ -173,7 +175,7 @@ namespace Exam
                             Points temp = new Points(Convert.ToInt32(a[0]), Convert.ToInt32(a[1]), Convert.ToInt32(a[2]));
                             ribs.Add(temp);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             using (StreamWriter sw = new StreamWriter(pathOut, false, Encoding.UTF8))
                             {
@@ -208,9 +210,9 @@ namespace Exam
                     Process.GetCurrentProcess().Kill();
 
                 }
-                
+
             }
-           
+
         }
 
 
