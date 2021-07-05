@@ -9,7 +9,7 @@ namespace Exam
         static void Main(string[] args)
         {
 
-            CriticalWay answer = new CriticalWay("In.txt", "Out.csv");
+            CriticalWay answer = new CriticalWay("In.csv", "Out.csv");
             answer.ReadFile();
             foreach (Points start in answer.ribs.Where(x => x.out_point == 1))
             {
@@ -18,7 +18,6 @@ namespace Exam
 
             }
             answer.Parse();
-            Console.WriteLine(answer.s);
             answer.WriteFile();
             Console.ReadLine();
         }

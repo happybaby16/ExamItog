@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace Exam
 
         public List<Points> ribs = new List<Points>();// Список из рёбер и их весов
 
-        List<dynamic[]> ways_weight = new List<dynamic[]>();// Массив, в который записываются пути и их суммарный вес
+        List<dynamic[]> ways_weight = new List<dynamic[]>();// Массив, в который записываются пути и их суммарный вес {{путь(string), вес(int)}, {путь, вес}}
 
         int end_point;// Конечная точка критического пути
 
@@ -34,7 +35,7 @@ namespace Exam
 
 
         /// <summary>
-        /// Метод, который проходит по всем веткам за счёт рекурсии. Ответ записывает в переменную "s".
+        /// Метод прохода по всем веткам за счёт рекурсии. Ответ записывает в переменную "s".
         /// </summary>
         /// <param name="ribs">List<Points></Points></param>
         /// <param name="start_point">Points</param>
@@ -156,36 +157,56 @@ namespace Exam
         /// Метод чтения исходных данных из .csv файла
         /// </summary>
         public void ReadFile()
-        { 
-            StreamReader sr = new StreamReader(pathIn);
-            using (sr)
+        {
+            try
             {
-                while (sr.EndOfStream != true)
+                StreamReader sr = new StreamReader(pathIn);
+                using (sr)
                 {
-                    try
+                    while (sr.EndOfStream != true)
                     {
+                        try
+                        {
 
-                        var a = sr.ReadLine().Split(';');
-                        Points temp = new Points(Convert.ToInt32(a[0]), Convert.ToInt32(a[1]), Convert.ToInt32(a[2]));
-                        ribs.Add(temp);
-                    }
-                    catch
-                    {
-                        break;
+                            var a = sr.ReadLine().Split(';');
+                            Points temp = new Points(Convert.ToInt32(a[0]), Convert.ToInt32(a[1]), Convert.ToInt32(a[2]));
+                            ribs.Add(temp);
+                        }
+                        catch(Exception ex)
+                        {
+                            using (StreamWriter sw = new StreamWriter(pathOut, false, Encoding.UTF8))
+                            {
+                                sw.WriteLine("Ошибка: " + ex.Message);
+                                sw.Close();
+                                Process.GetCurrentProcess().Kill();
+
+                            }
+                        }
                     }
                 }
-            }
 
-            int max = ribs[0].in_point;
-            foreach (Points a in ribs)
-            {
-                if (max < a.in_point)
+                int max = ribs[0].in_point;
+                foreach (Points a in ribs)
                 {
-                    max = a.in_point;
-                }
+                    if (max < a.in_point)
+                    {
+                        max = a.in_point;
+                    }
 
+                }
+                end_point = max;
             }
-            end_point = max;
+            catch (Exception ex)
+            {
+                using (StreamWriter sw = new StreamWriter(pathOut, false, Encoding.UTF8))
+                {
+                    sw.WriteLine("Ошибка: " + ex.Message);
+                    sw.Close();
+                    Process.GetCurrentProcess().Kill();
+
+                }
+                
+            }
            
         }
 
