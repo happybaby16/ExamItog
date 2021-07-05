@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Exam
         static void Main(string[] args)
         {
 
-            List<Hard> ribs = new List<Hard>();
+            List<CriticalWay> ribs = new List<CriticalWay>();
             StreamReader sr = new StreamReader(@"data.csv");
             using (sr)
             {
@@ -21,7 +22,7 @@ namespace Exam
                     {
 
                         var a = sr.ReadLine().Split(';');
-                        Hard temp = new Hard();
+                        CriticalWay temp = new CriticalWay();
                         temp.AddData(Convert.ToInt32(a[0]), Convert.ToInt32(a[1]), Convert.ToInt32(a[2]));
                         ribs.Add(temp);
                     }
@@ -33,7 +34,7 @@ namespace Exam
             }
 
             int max = ribs[0].in_point;
-            foreach (Hard a in ribs)
+            foreach (CriticalWay a in ribs)
             {
                 if (max < a.in_point)
                 {
@@ -45,8 +46,8 @@ namespace Exam
 
             int end_point = max;
 
-            Hard answer = new Hard();
-            foreach (Hard start in ribs.Where(x => x.out_point == 1))
+            CriticalWay answer = new CriticalWay();
+            foreach (CriticalWay start in ribs.Where(x => x.out_point == 1))
             {
 
                 answer.FindHardWay(ribs, start, end_point);

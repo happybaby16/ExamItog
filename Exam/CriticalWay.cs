@@ -23,7 +23,7 @@ namespace Exam
             weight = w;
         }
 
-        public int FindHardWay(List<Hard> ribs, Hard start_point, int end_point)
+        public int FindHardWay(List<CriticalWay> ribs, CriticalWay start_point, int end_point)
         {
 
 
@@ -44,7 +44,7 @@ namespace Exam
 
 
 
-            foreach (Hard ob in ribs.Where(x => x.out_point == start_point.in_point))
+            foreach (CriticalWay ob in ribs.Where(x => x.out_point == start_point.in_point))
             {
                 s = s + start_point.out_point + " - " + start_point.in_point + "|" + start_point.weight + "\n";
                 if (start_point.in_point == ob.out_point)
