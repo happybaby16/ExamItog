@@ -12,20 +12,17 @@ namespace Exam
         static void Main(string[] args)
         {
 
-            
-
-            CriticalWay answer = new CriticalWay("In.txt", "Out.txt");
-
-
-
+            CriticalWay answer = new CriticalWay("In.txt", "Out.csv");
+            answer.ReadFile();
             foreach (Points start in answer.ribs.Where(x => x.out_point == 1))
             {
 
                 answer.FindHardWay(answer.ribs, start);
 
             }
+            Console.WriteLine(answer.s);
             answer.Parse();
-            answer.WriteFile("Крит.csv");
+            answer.WriteFile();
         }
     }
 }

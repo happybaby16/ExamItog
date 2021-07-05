@@ -20,14 +20,21 @@ namespace Exam
             this.pathOut = pathOut;
         }
 
+        
+        string s = ""; // Переменная, куда записываются результат прохождения по всем веткам
 
-        public string s = "";
-        public List<Points> ribs = new List<Points>();
-        List<dynamic[]> ways_weight = new List<dynamic[]>();
+        public List<Points> ribs = new List<Points>();// Список из рёбер и их весов
 
-        int end_point;
+        List<dynamic[]> ways_weight = new List<dynamic[]>();// Массив, в который записываются пути и их суммарный вес
 
+        int end_point;// Конечная точка критического пути
 
+        /// <summary>
+        /// Метод, который проходит по всем веткам за счёт рекурсии. Ответ записывает в переменную "s".
+        /// </summary>
+        /// <param name="ribs">List<Points></Points></param>
+        /// <param name="start_point">Points</param>
+        /// <returns></returns>
         public int FindHardWay(List<Points> ribs, Points start_point)
         {
 
@@ -72,6 +79,14 @@ namespace Exam
 
 
 
+
+
+
+
+
+        /// <summary>
+        /// Парсит данные, полученные после прохождения по всем путям
+        /// </summary>
         public void Parse()
         {
             string[] ways = s.Split(';');
@@ -108,6 +123,14 @@ namespace Exam
 
 
 
+
+
+
+
+       /// <summary>
+       /// Метод поиска критического пути, который возвращает индекс на котором находится критический путь
+       /// </summary>
+       /// <returns>int</returns>
         public int FindMax()
         {
             int max = ways_weight[0][1], index = 0;
@@ -125,9 +148,12 @@ namespace Exam
 
 
 
-        public void ReadFile(string path)
+        /// <summary>
+        /// Метод чтения исходных данных из .csv файла
+        /// </summary>
+        public void ReadFile()
         { 
-            StreamReader sr = new StreamReader(path);
+            StreamReader sr = new StreamReader(pathIn);
             using (sr)
             {
                 while (sr.EndOfStream != true)
@@ -159,9 +185,19 @@ namespace Exam
            
         }
 
-        public void WriteFile(string path)
+
+
+
+
+
+
+
+        /// <summary>
+        /// Метод записи ответа в .csv файл
+        /// </summary>
+        public void WriteFile()
         {
-            StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8);
+            StreamWriter sw = new StreamWriter(pathOut, false, Encoding.UTF8);
             sw.WriteLine(ways_weight[FindMax()][0] + ways_weight[FindMax()][1] + " - длина критического пути");
             sw.Close();
         }
